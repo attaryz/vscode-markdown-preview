@@ -1,0 +1,76 @@
+{
+  "name": "vscode-markdown-tree",
+  "displayName": "Markdown Tree View",
+  "description": "List and preview markdown files in a tree view",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:markdownTree",
+    "onCommand:markdownTree.refresh",
+    "onCommand:markdownTree.openPreview"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "markdown-tree",
+          "title": "Markdown Files",
+          "icon": "$(markdown)"
+        }
+      ]
+    },
+    "views": {
+      "markdown-tree": [
+        {
+          "type": "tree",
+          "id": "markdownTree",
+          "name": "Markdown Files"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "markdownTree.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "markdownTree.openPreview",
+        "title": "Open Preview"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "markdownTree.refresh",
+          "when": "view == markdownTree",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "lint": "tsc --noEmit",
+    "package": "vsce package --no-yarn"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.3.0",
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "marked": "^12.0.0"
+  },
+  "packageManager": "yarn@4.17.0"
+}
